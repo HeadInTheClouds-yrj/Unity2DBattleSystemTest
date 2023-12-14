@@ -227,7 +227,6 @@ public class MagicRay : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(item.transform.name);
                     endParticle.position = item.transform.position;
                     Vector3 self_target = item.transform.position - start.position;
                     Vector3 horizon = (new Vector3(item.transform.position.x - 1, item.transform.position.y, item.transform.position.z) - item.transform.position).normalized;

@@ -22,7 +22,7 @@ public class NpcManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        EventManager.Instance.InputEvent.GetRightMouseDown(npcs[0].transform);
     }
     public void AddNpc(NpcAI npcAI)
     {

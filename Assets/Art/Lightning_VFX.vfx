@@ -25,7 +25,7 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 0
+    x: -0
     y: -1162
     width: 4198
     height: 2913
@@ -88,7 +88,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.7830188870429993,"g":0.003693494014441967,"b":0.01052965596318245,"a":0.0}'
+      m_SerializableObject: '{"r":1.0,"g":1.0,"b":1.0,"a":0.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -173,7 +173,7 @@ VisualEffectResource:
     m_UpdateMode: 0
     m_PreWarmDeltaTime: 0.05
     m_PreWarmStepCount: 0
-    m_InitialEventName: OnPlay
+    m_InitialEventName: OnPlayLightning
 --- !u!114 &8926484042661614555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
       slotIndex: 0
   m_OutputFlowSlot:
   - link: []
-  blendMode: 0
+  blendMode: 1
   useAlphaClipping: 0
   generateMotionVector: 0
   excludeFromTAA: 0
@@ -2062,7 +2062,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":0.8815398216247559,"outTangent":0.8815398216247559,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.29578253626823428,"value":0.44930732250213625,"inTangent":-0.9285616278648377,"outTangent":-0.9285616278648377,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.6649763584136963,"value":0.36656010150909426,"inTangent":-0.8906230330467224,"outTangent":-0.8906230330467224,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.9959905743598938,"value":0.004685878753662109,"inTangent":-0.4341912567615509,"outTangent":-0.4341912567615509,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.396240234375,"inTangent":0.8815398216247559,"outTangent":0.8815398216247559,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.29866644740104678,"value":0.8195770978927612,"inTangent":-0.9285616278648377,"outTangent":-0.9285616278648377,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.4875166416168213,"value":0.35474979877471926,"inTangent":-0.8906230330467224,"outTangent":-0.8906230330467224,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.9959905743598938,"value":0.004685878753662109,"inTangent":-0.4341912567615509,"outTangent":-0.4341912567615509,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: curve
@@ -2215,7 +2215,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":0.7830188870429993,"g":0.003693494014441967,"b":0.01052965596318245,"a":0.0}'
+      m_SerializableObject: '{"r":1.0,"g":1.0,"b":1.0,"a":0.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -3501,10 +3501,11 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_InputSlots:
   - {fileID: 8926484042661614740}
+  - {fileID: 8926484042661615054}
   m_OutputSlots: []
   m_Disabled: 0
   attribute: color
-  Composition: 0
+  Composition: 3
   Source: 0
   Random: 0
   channels: 6
@@ -6065,7 +6066,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.5,"inTangent":-1.650270700454712,"outTangent":-1.650270700454712,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.30013275146484377,"value":0.00469970703125,"inTangent":-1.650270700454712,"outTangent":-1.650270700454712,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.00144195556640625,"value":0.9976348876953125,"inTangent":-2.604280471801758,"outTangent":-2.604280471801758,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.30301666259765627,"value":0.212249755859375,"inTangent":-2.604280471801758,"outTangent":-2.604280471801758,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -6098,10 +6099,10 @@ MonoBehaviour:
   m_Disabled: 0
   attribute: color
   Composition: 0
-  AlphaComposition: 0
+  AlphaComposition: 1
   SampleMode: 0
   Mode: 1
-  ColorMode: 1
+  ColorMode: 2
   channels: 6
 --- !u!114 &8926484042661614942
 MonoBehaviour:
@@ -8097,17 +8098,17 @@ MonoBehaviour:
   - link: []
   m_OutputFlowSlot:
   - link:
-    - context: {fileID: 8926484042661614682}
-      slotIndex: 0
     - context: {fileID: 8926484042661614555}
-      slotIndex: 0
-    - context: {fileID: 8926484042661614950}
       slotIndex: 0
     - context: {fileID: 8926484042661615030}
       slotIndex: 0
     - context: {fileID: 8926484042661614786}
       slotIndex: 0
-  eventName: OnPlay
+    - context: {fileID: 8926484042661614950}
+      slotIndex: 0
+    - context: {fileID: 8926484042661614682}
+      slotIndex: 0
+  eventName: OnPlayLightning
 --- !u!114 &8926484042661615053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8129,8 +8130,42 @@ MonoBehaviour:
   title: 
   m_Owners:
   - {fileID: 8926484042661615052}
-  - {fileID: 8926484042661614682}
   - {fileID: 8926484042661614555}
-  - {fileID: 8926484042661614950}
   - {fileID: 8926484042661615030}
   - {fileID: 8926484042661614786}
+  - {fileID: 8926484042661614950}
+  - {fileID: 8926484042661614682}
+--- !u!114 &8926484042661615054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615054}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614739}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 1
+    m_Space: 2147483647
+  m_Property:
+    name: Blend
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+  m_Direction: 0
+  m_LinkedSlots: []

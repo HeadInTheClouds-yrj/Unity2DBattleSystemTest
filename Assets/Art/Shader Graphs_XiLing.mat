@@ -42,8 +42,8 @@ Material:
     - _NoiseSize: 30
     - _NosiseSpeed: 35
     m_Colors:
-    - _Color1: {r: 11.193761, g: 0, b: 0.10032555, a: 1}
-    - _Color2: {r: 5.5316052, g: 0.60770303, b: 0, a: 1}
+    - _Color1: {r: 11.19376, g: 0, b: 0.34609005, a: 1}
+    - _Color2: {r: 5.5316052, g: 0, b: 0.29908332, a: 1}
     - _NosiseSpeed: {r: -0.3, g: 0, b: 0, a: 0}
     - _Speed: {r: -0.3, g: 0, b: 0, a: 0}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}

@@ -61,4 +61,12 @@ public class InputEvent
             OnGetLeftMouseUp();
         }
     }
+    public event Action<Transform> OnGetRightMouseDown;
+    public void GetRightMouseDown(Transform parent)
+    {
+        if (OnGetRightMouseDown != null && Input.GetMouseButtonDown(2))
+        {
+            OnGetRightMouseDown(parent);
+        }
+    }
 }
