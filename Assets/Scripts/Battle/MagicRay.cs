@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class MagicRay : MonoBehaviour
 {
@@ -195,18 +193,22 @@ public class MagicRay : MonoBehaviour
     {
         
     }
-    public void NPCMagicRayPreWarm(Transform startParticle,Transform start,LineRenderer _lineRenderer,Material _material_LineRender,ParticleSystem _particleSystemStart)
+    public void PlayVFXPower(VisualEffect startParticle)
     {
-        startParticle.position = start.position;
-        Vector3.MoveTowards(startParticle.position, start.position, Time.deltaTime * 100);
+        startParticle.Play();
+    }
+    public void NPCMagicRayPreWarm(VisualEffect startParticle,Transform start,LineRenderer _lineRenderer,Material _material_LineRender,ParticleSystem _particleSystemStart)
+    {
+        //startParticle.position = start.position;
+        //Vector3.MoveTowards(startParticle.position, start.position, Time.deltaTime * 100);
         _lineRenderer.SetPosition(0, start.position);
         _lineRenderer.SetPosition(1, start.position);
         _material_LineRender.SetFloat("_Alpha", 1);
-        if (!_particleSystemStart.isPlaying)
-        {
-            _particleSystemStart.Play();
-            StartCoroutine(PullLingQi(_particleSystemStart));
-        }
+        //if (!_particleSystemStart.isPlaying)
+        //{
+        //    _particleSystemStart.Play();
+        //    StartCoroutine(PullLingQi(_particleSystemStart));
+        //}
     }
 
     public void NPCFireMagicRay(Transform endParticle,LineRenderer _lineRenderer, Material _material_LineRender,Vector3 end,Transform start,Transform player, ParticleSystem _particleSystemStart, ParticleSystem _particleSystemEnd,bool flip)

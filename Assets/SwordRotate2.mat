@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RayAttack 4
-  m_Shader: {fileID: -6465566751694194690, guid: a394a1f9c611de14aa65251fd1232ee4, type: 3}
+  m_Name: SwordRotate2
+  m_Shader: {fileID: -6465566751694194690, guid: b108a30d26d2c334e8497327bed6e5ee, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -20,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 915c4afae4942db419914ad55f7d1c3d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -34,18 +38,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0
-    - _AlphaCenter: 1.995743
-    - _AlphaOthers: 0.1
-    - _DownY: 0
-    - _Float: 22.56
-    - _Float2: 1453.81
-    - _Horizontal: 1
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _UpY: 0
-    - _Vertical: 0.5
-    m_Colors:
-    - _Color: {r: 4.7998657, g: 0, b: 1825.2128, a: 1}
-    - _Speed: {r: 0.23, g: 0, b: 0, a: 0}
+    - _Float: -0.58
+    m_Colors: []
   m_BuildTextureStacks: []
