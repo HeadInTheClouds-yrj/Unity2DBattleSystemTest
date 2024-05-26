@@ -66,6 +66,7 @@ public class InputEvent
     {
         if (OnGetRightMouseDown != null && Input.GetMouseButtonDown(2))
         {
+            Debug.Log(parent.name);
             OnGetRightMouseDown(parent);
         }
     }

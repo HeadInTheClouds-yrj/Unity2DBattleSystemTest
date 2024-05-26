@@ -9,7 +9,8 @@ public class TrackingSword : MonoBehaviour
     private Transform target;
     [SerializeField]private float flySpeed = 40f;
     [SerializeField]private float rotateSpeed = 200f;
-
+    [SerializeField] private LayerMask npcLayerMask;
+    private float lastHitTime = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +36,19 @@ public class TrackingSword : MonoBehaviour
         float rotateAmount = Vector3.Cross(direction, -transform.up).z;
         flySword.angularVelocity = -rotateAmount * rotateSpeed;
         flySword.velocity = -transform.up * flySpeed;
+        Collider2D collider2d = Physics2D.OverlapCircle(transform.position,.1f,npcLayerMask);
+        if (lastHitTime<4f)
+        {
+            lastHitTime += Time.deltaTime;
+        }
+        if (collider2d != null)
+        {
+            if (collider2d.transform.TryGetComponent(out NpcAI npc)&& lastHitTime >2f)
+            {
+                Debug.Log(npc.name);
+                npc.ReduceBlood(Random.Range(1, 101));
+                lastHitTime = 0;
+            }
+        }
     }
 }

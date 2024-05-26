@@ -122,6 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flySpeed: 40
   rotateSpeed: 200
+  npcLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!96 &1970677321994124817
 TrailRenderer:
   serializedVersion: 2

@@ -88,6 +88,10 @@ public class NpcAI : MonoBehaviour
         }
         
     }
+    public void ReduceBlood(float value)
+    {
+        ThrowDamageText.instance.ThrowReduceTextFactory(transform, value,15f);
+    }
     private void NpcRadiuMove(float moveSpeed)
     {
         //npc 在 player 的半径之外
