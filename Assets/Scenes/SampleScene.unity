@@ -5353,6 +5353,7 @@ GameObject:
   - component: {fileID: 215223912}
   - component: {fileID: 215223913}
   - component: {fileID: 215223914}
+  - component: {fileID: 215223915}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -5460,6 +5461,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07434f2d815c8f46abb0dd8079a839d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &215223915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215223907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c192d1af99737f648ba3ae0fe15681d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwDamageTextPrefeb: {fileID: 9139417880053860070, guid: 5adb31e8c6ef9234290da2f231226d32, type: 3}
 --- !u!1 &276657404
 GameObject:
   m_ObjectHideFlags: 0
@@ -5565,7 +5579,7 @@ VFXRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 662607415
   m_SortingLayer: 3
-  m_SortingOrder: 11
+  m_SortingOrder: 68
 --- !u!2083052967 &285334083
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -5586,12 +5600,15 @@ VisualEffect:
       - m_Value: 0.5
         m_Name: PerParticleLifeTime
         m_Overridden: 0
-      - m_Value: 0.4
+      - m_Value: 0.37
         m_Name: PerTrailsLifeTime
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: -0.6
         m_Name: FoursPosition_Z_direction
-        m_Overridden: 0
+        m_Overridden: 1
+      - m_Value: 2
+        m_Name: ShootRaySpeed
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -15579,7 +15596,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   m_Layer: 0
-  m_Name: bb
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25407,6 +25424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 0}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -35510,6 +35528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 0}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -35548,7 +35567,7 @@ GameObject:
   - component: {fileID: 1115324018}
   - component: {fileID: 1115324019}
   - component: {fileID: 1115324020}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35750,6 +35769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 0}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -45615,6 +45635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 0}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -45653,7 +45674,7 @@ GameObject:
   - component: {fileID: 1282172846}
   - component: {fileID: 1282172847}
   - component: {fileID: 1282172848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45688,6 +45709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 4787938495283215567, guid: 7294ede25f041a4469ec0a4d17d2be08, type: 3}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -55402,7 +55424,7 @@ GameObject:
   - component: {fileID: 1416976883}
   - component: {fileID: 1416976882}
   - component: {fileID: 1416976881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Npc (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55489,6 +55511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb77fe3933a9dc49a1a36384dd66392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySword: {fileID: 4787938495283215567, guid: 7294ede25f041a4469ec0a4d17d2be08, type: 3}
   player: {fileID: 1115324017}
   moveSpeed: 10
   radius: 20.1
@@ -55614,15 +55637,30 @@ VisualEffect:
       - m_Value: -0.6
         m_Name: FoursPosition_Z_direction
         m_Overridden: 0
+      - m_Value: 5
+        m_Name: ShootRaySpeed
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 1, y: 0.025012832, z: 0, w: 0}
+      - m_Value: {x: 0.21398352, y: 1.5157166, z: 0, w: 0}
         m_Name: TrailsColor
-        m_Overridden: 0
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 0, z: 0.057308674, w: 0}
+        m_Name: New Color
+        m_Overridden: 1
+      - m_Value: {x: 0.7830189, y: 0.033241354, z: 0.60367954, w: 0}
+        m_Name: LerpYColor
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 0, z: 0.019001007, w: 0}
+        m_Name: perLerpYColor
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 3.9999995, z: 2.5538547, w: 0}
+        m_Name: perLerpXcolor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:

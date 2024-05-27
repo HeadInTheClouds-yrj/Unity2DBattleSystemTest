@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class NpcAI : MonoBehaviour
 {
+    [SerializeField] private GameObject flySword;
     [SerializeField] private Transform player;
     private Vector3 target;
     [SerializeField] private float moveSpeed = 10f;
@@ -43,6 +44,11 @@ public class NpcAI : MonoBehaviour
     }
     void Start()
     {
+        GameObject sword = Object.Instantiate<GameObject>(flySword, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+        if (sword.transform.TryGetComponent<TrackingSword>(out TrackingSword trackingSword))
+        {
+            trackingSword.InitializedSword(transform,player, LayerMask.GetMask("Player"),100f,2000f);
+        }
     }
 
     // Update is called once per frame
@@ -50,7 +56,7 @@ public class NpcAI : MonoBehaviour
     {
         if (temp)
         {
-            
+
             MagicRay.instance.NPCFireMagicRay(endParticle,_lineRenderer,_material_LineRender,end,start, player,_particleSystemStart,_particleSystemEnd, spriteRenderer.flipX);
             direction = Random.Range(0, 3)<1f ? true : false;
             temp = !temp;
@@ -91,6 +97,10 @@ public class NpcAI : MonoBehaviour
     public void ReduceBlood(float value)
     {
         ThrowDamageText.instance.ThrowReduceTextFactory(transform, value,15f);
+    }
+    private void ShootSwort()
+    {
+
     }
     private void NpcRadiuMove(float moveSpeed)
     {

@@ -46,7 +46,7 @@ public class InputEvent
         }
     }
     public event Action<Transform> OnGetLeftMouseDown;
-    public void GetLeftMouseDown(Transform parent)
+    public void GetLeftMouseDown(Transform parent) 
     {
         if (OnGetLeftMouseDown != null && Input.GetMouseButtonDown(0))
         {
