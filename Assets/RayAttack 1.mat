@@ -34,8 +34,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
-    - _AlphaCenter: 1.9769425
+    - _Alpha: 0
+    - _AlphaCenter: 1.9919298
     - _AlphaOthers: 0.1
     - _DownY: 0
     - _Float: 22.56

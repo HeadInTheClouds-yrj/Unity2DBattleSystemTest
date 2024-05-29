@@ -54,31 +54,37 @@ public class NpcAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Shoot();
+
+
+    }
+    private void Shoot()
+    {
         if (temp)
         {
 
-            MagicRay.instance.NPCFireMagicRay(endParticle,_lineRenderer,_material_LineRender,end,start, player,_particleSystemStart,_particleSystemEnd, spriteRenderer.flipX);
-            direction = Random.Range(0, 3)<1f ? true : false;
+            MagicRay.instance.NPCFireMagicRay(endParticle, _lineRenderer, _material_LineRender, end, start, player, _particleSystemStart, _particleSystemEnd, spriteRenderer.flipX);
+            direction = Random.Range(0, 3) < 1f ? true : false;
             temp = !temp;
             flag2 = !flag2;
-            flag3= !flag3;
+            flag3 = !flag3;
         }
         if (!temp)
         {
-            tiemfloat+=Time.deltaTime;
+            tiemfloat += Time.deltaTime;
             if (tiemfloat > 1)
             {
                 MagicRay.instance.NPCMagicRayPreWarm(startParticle, start, _lineRenderer, _material_LineRender, _particleSystemStart);
-                if (tiemfloat>1 && flag3)
+                if (tiemfloat > 1 && flag3)
                 {
                     MagicRay.instance.PlayVFXPower(startParticle);
                     flag3 = !flag3;
                 }
-                NpcRadiuMove(moveSpeed*0.5f);
+                NpcRadiuMove(moveSpeed * 0.5f);
                 if (tiemfloat > 1.75f && !flag2)
                 {
                     end = player.position;
-                    Debug.DrawLine(transform.position,end, _material_LineRender.GetColor("_Color"),0.25f,false);
+                    Debug.DrawLine(transform.position, end, _material_LineRender.GetColor("_Color"), 0.25f, false);
                     flag2 = !flag2;
                 }
             }
@@ -86,17 +92,20 @@ public class NpcAI : MonoBehaviour
             {
                 NpcRadiuMove(moveSpeed);
             }
-            if (tiemfloat>2)
+            if (tiemfloat > 2)
             {
                 temp = true;
                 tiemfloat = 0;
             }
         }
-        
     }
     public void ReduceBlood(float value)
     {
         ThrowDamageText.instance.ThrowReduceTextFactory(transform, value,15f);
+        if (value >=80)
+        {
+            Destroy(gameObject);
+        }
     }
     private void ShootSwort()
     {

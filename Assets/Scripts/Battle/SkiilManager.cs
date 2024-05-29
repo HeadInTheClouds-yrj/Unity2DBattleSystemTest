@@ -34,7 +34,7 @@ public class SkiilManager : MonoBehaviour
         GameObject sword = Object.Instantiate<GameObject>(flySword,parent.position,Quaternion.Euler(new Vector3(0,0,180)));
         if (sword.transform.TryGetComponent<TrackingSword>(out TrackingSword trackingSword))
         {
-            trackingSword.InitializedSword(transform,NpcManager.Instance.GetNpcs()[Random.Range(0,2)].transform,LayerMask.GetMask("Npc"));
+            trackingSword.InitializedSword(transform,NpcManager.Instance.GetNpcs()[Random.Range(0,2)].transform,LayerMask.GetMask("Npc"),100f,4000f);
         }
     }
 }

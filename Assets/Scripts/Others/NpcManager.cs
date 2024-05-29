@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NpcManager : MonoBehaviour
@@ -22,7 +23,17 @@ public class NpcManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        EventManager.Instance.InputEvent.GetRightMouseDown(npcs[0].transform);
+        if (npcs[0].IsDestroyed())
+        {
+            EventManager.Instance.InputEvent.GetRightMouseDown(npcs[1].transform);
+        }
+        else if (npcs[1].IsDestroyed())
+        {
+            EventManager.Instance.InputEvent.GetRightMouseDown(npcs[0].transform);
+        }
+        else
+        {
+        }
     }
     public void AddNpc(NpcAI npcAI)
     {

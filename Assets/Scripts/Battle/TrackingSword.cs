@@ -22,9 +22,13 @@ public class TrackingSword : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!target.IsDestroyed()&&target != owner)
+        if (owner.IsDestroyed())
         {
-            Vector2 randomTarget = new Vector2(target.position.x+Random.Range(-2.5f,2.5f),target.position.y+ Random.Range(-2.5f, 2.5f));
+            Destroy(gameObject);
+        }
+        else if (!target.IsDestroyed() && target != owner)
+        {
+            Vector2 randomTarget = new Vector2(target.position.x + Random.Range(-2.5f, 2.5f), target.position.y + Random.Range(-2.5f, 2.5f));
             direction = randomTarget - flySword.position;
             direction.Normalize();
             float rotateAmount = Vector3.Cross(direction, -transform.up).z;

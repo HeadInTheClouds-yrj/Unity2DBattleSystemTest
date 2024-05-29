@@ -67,5 +67,6 @@ public class PlayerContrl : MonoBehaviour
         EventManager.Instance.InputEvent.GetLeftMouse();
         EventManager.Instance.InputEvent.GetLeftMouseUp();
         EventManager.Instance.InputEvent.GetLeftMouseDown(this.transform);
+        EventManager.Instance.InputEvent.GetRightMouseDown(this.transform);
     }
 }
