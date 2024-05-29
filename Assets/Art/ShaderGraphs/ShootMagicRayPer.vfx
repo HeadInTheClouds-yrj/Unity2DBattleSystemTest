@@ -375,8 +375,8 @@ MonoBehaviour:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 10
-    min: -100
-    max: 100
+    min: -1000
+    max: 1000
     enumValues: []
     descendantCount: 0
   - name: DragPower
@@ -6604,12 +6604,12 @@ MonoBehaviour:
     m_Type:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-    m_SerializableObject: -100
+    m_SerializableObject: -1000
   m_Max:
     m_Type:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-    m_SerializableObject: 100
+    m_SerializableObject: 1000
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 1

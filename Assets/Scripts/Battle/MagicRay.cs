@@ -64,15 +64,18 @@ public class MagicRay : MonoBehaviour
         StartCoroutine(RayDestroy());
 
     }
-    private Vector3 GetTarget(Vector3 startPositon, Vector3 endPosition)
+    public Vector3 GetTarget(Vector3 startPositon, Vector3 endPosition,float multiply = 5000)
     {
         float b, k;
         Vector3 target = endPosition - startPositon;
-
+        //The player is the zero point of the coordinate system.
+        //The relative position of the mouse click is in the first or third quadrant, close to the y coordinate axis.
         if (target.y / target.x > float.MaxValue)
         {
             k = 999f;
         }
+        //The player is the zero point of the coordinate system.
+        //The relative position of the mouse click is in the second or fourth quadrant, close to the y coordinate axis.
         else if (target.y / target.x < float.MinValue)
         {
             k = -999f;
@@ -81,7 +84,7 @@ public class MagicRay : MonoBehaviour
         {
             k = target.y / target.x;
         }
-
+        //b= y - k*x
         if (endPosition.y - endPosition.x * k > float.MaxValue)
         {
             b = float.MaxValue;
@@ -94,10 +97,10 @@ public class MagicRay : MonoBehaviour
         {
             b = endPosition.y - endPosition.x * k;
         }
-        //Debug.Log("k:   "+k);
-        //b = (endPosition.y * startPositon.x - startPositon.y * endPosition.x)/(startPositon.x - endPosition.x);
-        //k = (startPositon.y - b) / startPositon.x;
-        target.x *= 5000;
+
+        //Multiply the final direction position
+        target.x *= multiply;
+
         if (k*target.x + b>float.MaxValue)
         {
             target.y = float.MaxValue;
