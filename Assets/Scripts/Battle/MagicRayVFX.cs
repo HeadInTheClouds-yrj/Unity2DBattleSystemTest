@@ -25,7 +25,19 @@ public class MagicRayVFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (counttime<.5f && tempflag == true)
+        {
+            counttime += Time.deltaTime;
+        }
+        else if(counttime>.5f&&tempflag == true)
+        {
+            visualEffect.SetFloat("BegingTotalTime",9999999f);
+            counttime= 0;
+            tempflag = false;
+        }
     }
+    float counttime = 0;
+    bool tempflag = false;
     private void Shoot(Transform transform)
     {
         
@@ -33,9 +45,12 @@ public class MagicRayVFX : MonoBehaviour
         Vector2 direction = end - (Vector2)transform.position;
         Vector3 endPosition = GetStartPosition(direction,transform.position,end, redius);
         Debug.Log(endPosition);
+        visualEffect.SetFloat("BegingTotalTime", 0f);
         visualEffect.SetVector2("AttackDirection", direction.normalized);
         visualEffect.SetVector3("StartShootPosition", endPosition);
         visualEffect.Play();
+        tempflag = true;
+        counttime = 0;
     }
     private Vector3 GetStartPosition(Vector2 dir,Vector2 owner, Vector2 endPosition, float redius = 2f)
     {

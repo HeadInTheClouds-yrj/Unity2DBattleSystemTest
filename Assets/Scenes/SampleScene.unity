@@ -214,19 +214,19 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.5
+      - m_Value: 0.25
         m_Name: PerParticleLifeTime
-        m_Overridden: 0
-      - m_Value: 0.4
+        m_Overridden: 1
+      - m_Value: 0.2
         m_Name: PerTrailsLifeTime
         m_Overridden: 1
-      - m_Value: -0.6
+      - m_Value: 2.2
         m_Name: FoursPosition_Z_direction
-        m_Overridden: 0
-      - m_Value: 109
+        m_Overridden: 1
+      - m_Value: 209
         m_Name: ShootRaySpeed
         m_Overridden: 1
-      - m_Value: 1.1111111e+10
+      - m_Value: 1e+9
         m_Name: BegingTotalTime
         m_Overridden: 1
     m_Vector2f:
@@ -259,6 +259,12 @@ VisualEffect:
       - m_Value: {x: 0, y: 0, z: 0, w: 0}
         m_Name: AttackRayColor
         m_Overridden: 1
+      - m_Value: {x: 0, y: 0, z: 0, w: 0}
+        m_Name: PerLerpXcolor
+        m_Overridden: 1
+      - m_Value: {x: 0.09361779, y: 0, z: 0, w: 0}
+        m_Name: PerLerpYColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -285,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a871f6fcf15614c86aeb1a7d5754f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redius: 2
+  redius: 17.73
 --- !u!1 &88004238
 GameObject:
   m_ObjectHideFlags: 0
