@@ -8,6 +8,7 @@ public class MagicRayVFX : MonoBehaviour
 {
     private VisualEffect visualEffect;
     // Start is called before the first frame update
+    [SerializeField] private float redius = 2f;
     private void OnEnable()
     {
         EventManager.Instance.InputEvent.OnGetRightMouseDown += Shoot;
@@ -30,7 +31,7 @@ public class MagicRayVFX : MonoBehaviour
         
         Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = end - (Vector2)transform.position;
-        Vector3 endPosition = GetStartPosition(direction,transform.position,end);
+        Vector3 endPosition = GetStartPosition(direction,transform.position,end, redius);
         Debug.Log(endPosition);
         visualEffect.SetVector2("AttackDirection", direction.normalized);
         visualEffect.SetVector3("StartShootPosition", endPosition);
@@ -38,7 +39,7 @@ public class MagicRayVFX : MonoBehaviour
     }
     private Vector3 GetStartPosition(Vector2 dir,Vector2 owner, Vector2 endPosition, float redius = 2f)
     {
-        float b, k,x = owner.x,y = owner.y,r = redius ,n,g;
+        float b, k,x = owner.x,y = owner.y,r = redius ,m,n,p;
         Vector2 target = dir.normalized;
         //The player is the zero point of the coordinate system.
         //The relative position of the mouse click is in the first or third quadrant, close to the y coordinate axis.
@@ -69,14 +70,38 @@ public class MagicRayVFX : MonoBehaviour
         {
             b = endPosition.y - endPosition.x * k;
         }
-        Debug.Log("k=="+k+"\n" + "b=="+b);
+        m = k * k + 1;
+        n = 2*(k * b - k * y - x);
+        p = (b - y) * (b - y) - r * r + x * x;
         
-        n = r * r - x * x - (b-y) * (b-y);
-        g = (k * (b - y) - x)/Mathf.Sqrt(k*k + 1);
-        target.x = (Mathf.Sqrt(Mathf.Abs(n + g))-g)/Mathf.Sqrt(k*k + 1);
-        Debug.Log("n=="+n+"\n"+"g=="+g);
         //Multiply the final direction position
-        target.y =Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
+        if (endPosition.y>owner.y&&endPosition.x > owner.x)
+        {
+            target.x = (-n - Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
+            target.y = -Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
+
+            Debug.Log(target.y);
+            target.y = k * target.x + b;
+            Debug.Log(target.y);
+        }
+        else if (endPosition.y<owner.y && endPosition.x < owner.x)
+        {
+            target.x = (-n + Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
+            target.y = Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
+            Debug.Log(target.y);
+            target.y = k * target.x + b;
+            Debug.Log(target.y);
+        }
+        else if (endPosition.y>owner.y&&endPosition.x<owner.x)
+        {
+            target.x = (-n + Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
+            target.y = -Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
+        }
+        else
+        {
+            target.x = (-n - Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
+            target.y = Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
+        }
         return target;
     }
 }

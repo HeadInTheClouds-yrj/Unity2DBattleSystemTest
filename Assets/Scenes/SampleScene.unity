@@ -223,7 +223,7 @@ VisualEffect:
       - m_Value: -0.6
         m_Name: FoursPosition_Z_direction
         m_Overridden: 0
-      - m_Value: 1000
+      - m_Value: 109
         m_Name: ShootRaySpeed
         m_Overridden: 1
       - m_Value: 1.1111111e+10
@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a871f6fcf15614c86aeb1a7d5754f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redius: 2
 --- !u!1 &88004238
 GameObject:
   m_ObjectHideFlags: 0
@@ -35750,7 +35751,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115324016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.15, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
