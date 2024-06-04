@@ -29,6 +29,15 @@ public class MagicRayVFX : MonoBehaviour
         {
             counttime += Time.deltaTime;
         }
+        else if (tempHit && counttime>=.25f)
+        {
+            RaycastHit2D[] all = Physics2D.RaycastAll(startPosition,endPosition1 - startPosition,100000f,LayerMask.GetMask("Npc"));
+            foreach (RaycastHit2D item in all)
+            {
+                Debug.Log(item.transform.name);
+            }
+            tempHit = false;
+        }
         else if(counttime>.5f&&tempflag == true)
         {
             visualEffect.SetFloat("BegingTotalTime",9999999f);
@@ -38,19 +47,57 @@ public class MagicRayVFX : MonoBehaviour
     }
     float counttime = 0;
     bool tempflag = false;
+    bool tempHit = false;
+    Vector3 startPosition;
+    Vector3 endPosition1;
     private void Shoot(Transform transform)
     {
-        
+        //startPosition = transform.position;
+        //Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //endPosition1 = end;
+        //Vector2 direction = end - (Vector2)transform.position;
+        //Vector3 endPosition = GetStartPosition(direction,transform.position,end, redius);
+        //visualEffect.SetFloat("BegingTotalTime", 0f);
+        //visualEffect.SetVector2("AttackDirection", direction.normalized);
+        //visualEffect.SetVector3("StartShootPosition", endPosition);
+        //visualEffect.Play();
+        //tempHit= true;
+        //tempflag = true;
+        //counttime = 0;
+        StartCoroutine(ShootRayCountTime(transform,visualEffect));
+    }
+    IEnumerator ShootRayCountTime(Transform transform,VisualEffect visualEffect)
+    {
+        float counttime = 0;
+        bool raycastHitFlag = true;
         Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = end - (Vector2)transform.position;
-        Vector3 endPosition = GetStartPosition(direction,transform.position,end, redius);
-        Debug.Log(endPosition);
+        Vector3 endPosition = GetStartPosition(direction, transform.position, end, redius);
         visualEffect.SetFloat("BegingTotalTime", 0f);
         visualEffect.SetVector2("AttackDirection", direction.normalized);
         visualEffect.SetVector3("StartShootPosition", endPosition);
         visualEffect.Play();
-        tempflag = true;
-        counttime = 0;
+        while (true)
+        {
+            counttime += Time.deltaTime;
+            if (counttime>.23f && raycastHitFlag)
+            {
+                RaycastHit2D[] all = Physics2D.RaycastAll(transform.position, (Vector3)end - transform.position,((Vector3)end - transform.position).magnitude * 100f , LayerMask.GetMask("Npc"));
+                foreach (RaycastHit2D item in all)
+                {
+                    Debug.Log(item.transform.name);
+                }
+                raycastHitFlag = !raycastHitFlag;
+            }
+            if (counttime>.4f)
+            {
+                visualEffect.SetFloat("BegingTotalTime", 9999999f);
+                break;
+            }
+            yield return null;
+        }
+        yield return null;
+        Debug.Log("over!!!");
     }
     private Vector3 GetStartPosition(Vector2 dir,Vector2 owner, Vector2 endPosition, float redius = 2f)
     {
@@ -95,17 +142,13 @@ public class MagicRayVFX : MonoBehaviour
             target.x = (-n - Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
             target.y = -Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
 
-            Debug.Log(target.y);
             target.y = k * target.x + b;
-            Debug.Log(target.y);
         }
         else if (endPosition.y<owner.y && endPosition.x < owner.x)
         {
             target.x = (-n + Mathf.Sqrt(n * n - 4 * m * p)) / (2 * m);
             target.y = Mathf.Sqrt(Mathf.Pow(r, 2) - Mathf.Pow((target.x - x), 2)) + y;
-            Debug.Log(target.y);
             target.y = k * target.x + b;
-            Debug.Log(target.y);
         }
         else if (endPosition.y>owner.y&&endPosition.x<owner.x)
         {
