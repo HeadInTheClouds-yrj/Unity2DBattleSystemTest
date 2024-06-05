@@ -30,13 +30,14 @@ public class NpcAI : MonoBehaviour
     [SerializeField] private Transform start; // 
     private Vector3 end;
     private bool flag3 = true;
-
+    private MagicRayVFX magicRayVFX;
     //Y = sqrt(r'2 - (X-x)'2) + y
     //(y-tansform.position.y)'2 + (x-transform.position.x)'2 == r'2;
     // Start is called before the first frame update
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        magicRayVFX = GetComponent<MagicRayVFX>();
     }
     private void OnEnable()
     {
@@ -44,17 +45,18 @@ public class NpcAI : MonoBehaviour
     }
     void Start()
     {
-        GameObject sword = Object.Instantiate<GameObject>(flySword, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
-        if (sword.transform.TryGetComponent<TrackingSword>(out TrackingSword trackingSword))
-        {
-            trackingSword.InitializedSword(transform,player, LayerMask.GetMask("Player"),100f,2000f);
-        }
+        //GameObject sword = Object.Instantiate<GameObject>(flySword, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+        //if (sword.transform.TryGetComponent<TrackingSword>(out TrackingSword trackingSword))
+        //{
+        //    trackingSword.InitializedSword(transform,player, LayerMask.GetMask("Player"),100f,2000f);
+        //}
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Shoot();
+        Shoot();
 
 
     }
@@ -62,8 +64,8 @@ public class NpcAI : MonoBehaviour
     {
         if (temp)
         {
-
-            MagicRay.instance.NPCFireMagicRay(endParticle, _lineRenderer, _material_LineRender, end, start, player, _particleSystemStart, _particleSystemEnd, spriteRenderer.flipX);
+            magicRayVFX.Shoot(transform,player.transform.position);
+            //MagicRay.instance.NPCFireMagicRay(endParticle, _lineRenderer, _material_LineRender, end, start, player, _particleSystemStart, _particleSystemEnd, spriteRenderer.flipX);
             direction = Random.Range(0, 3) < 1f ? true : false;
             temp = !temp;
             flag2 = !flag2;
@@ -74,17 +76,15 @@ public class NpcAI : MonoBehaviour
             tiemfloat += Time.deltaTime;
             if (tiemfloat > 1)
             {
-                MagicRay.instance.NPCMagicRayPreWarm(startParticle, start, _lineRenderer, _material_LineRender, _particleSystemStart);
                 if (tiemfloat > 1 && flag3)
                 {
-                    MagicRay.instance.PlayVFXPower(startParticle);
                     flag3 = !flag3;
                 }
                 NpcRadiuMove(moveSpeed * 0.5f);
                 if (tiemfloat > 1.75f && !flag2)
                 {
                     end = player.position;
-                    Debug.DrawLine(transform.position, end, _material_LineRender.GetColor("_Color"), 0.25f, false);
+                    Debug.DrawLine(transform.position, end, _material_LineRender.GetColor("_Color"), 0.2f, false);
                     flag2 = !flag2;
                 }
             }
@@ -119,12 +119,10 @@ public class NpcAI : MonoBehaviour
             if (transform.position.x < player.position.x)
             {
                 spriteRenderer.flipX = false;
-                startParticle.SetFloat("FoursPosition_Z_direction", -2.7f);
             }
             else
             {
                 spriteRenderer.flipX = true;
-                startParticle.SetFloat("FoursPosition_Z_direction", 2.7f);
             }
             transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * moveSpeed);
         }
@@ -144,12 +142,10 @@ public class NpcAI : MonoBehaviour
             if (transform.position.x < player.position.x)
             {
                 spriteRenderer.flipX = false;
-                startParticle.SetFloat("FoursPosition_Z_direction", -2.7f);
             }
             else
             {
                 spriteRenderer.flipX = true;
-                startParticle.SetFloat("FoursPosition_Z_direction", 2.7f);
             }
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
         }
@@ -169,12 +165,12 @@ public class NpcAI : MonoBehaviour
             if (transform.position.x < player.position.x)
             {
                 spriteRenderer.flipX = false;
-                startParticle.SetFloat("FoursPosition_Z_direction", -2.7f);
+                
             }
             else
             {
                 spriteRenderer.flipX = true;
-                startParticle.SetFloat("FoursPosition_Z_direction", 2.7f);
+                
             }
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
         }
@@ -194,12 +190,10 @@ public class NpcAI : MonoBehaviour
             if (transform.position.x < player.position.x)
             {
                 spriteRenderer.flipX = false;
-                startParticle.SetFloat("FoursPosition_Z_direction", -2.7f);
             }
             else
             {
                 spriteRenderer.flipX = true;
-                startParticle.SetFloat("FoursPosition_Z_direction", 2.7f);
             }
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
         }
@@ -219,12 +213,10 @@ public class NpcAI : MonoBehaviour
             if (transform.position.x < player.position.x)
             {
                 spriteRenderer.flipX = false;
-                startParticle.SetFloat("FoursPosition_Z_direction", -2.7f);
             }
             else
             {
                 spriteRenderer.flipX = true;
-                startParticle.SetFloat("FoursPosition_Z_direction", 2.7f);
             }
             transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
         }

@@ -291,6 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a871f6fcf15614c86aeb1a7d5754f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
   redius: 17.73
 --- !u!1 &88004238
 GameObject:
@@ -5733,7 +5736,7 @@ VFXRenderer:
     firstSubMesh: 0
     subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
+  m_ProbeAnchor: {fileID: 1282172845}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_ReceiveGI: 1
@@ -5766,16 +5769,16 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.5
+      - m_Value: 0.25
         m_Name: PerParticleLifeTime
-        m_Overridden: 0
-      - m_Value: 0.37
+        m_Overridden: 1
+      - m_Value: 0.2
         m_Name: PerTrailsLifeTime
         m_Overridden: 1
       - m_Value: -0.6
         m_Name: FoursPosition_Z_direction
         m_Overridden: 1
-      - m_Value: 26
+      - m_Value: 14
         m_Name: ShootRaySpeed
         m_Overridden: 1
       - m_Value: 45
@@ -5793,6 +5796,15 @@ VisualEffect:
       - m_Value: {x: 1, y: 0.025012832, z: 0, w: 0}
         m_Name: TrailsColor
         m_Overridden: 0
+      - m_Value: {x: 0.39066315, y: 0, z: 1, w: 0}
+        m_Name: PerLerpXcolor
+        m_Overridden: 1
+      - m_Value: {x: 1.7411011, y: 0, z: 0.102417715, w: 0}
+        m_Name: PerLerpYColor
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 0, z: 0.23498249, w: 0}
+        m_Name: AttackRayColor
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -45850,6 +45862,7 @@ GameObject:
   - component: {fileID: 1282172846}
   - component: {fileID: 1282172847}
   - component: {fileID: 1282172848}
+  - component: {fileID: 1282172849}
   m_Layer: 6
   m_Name: Npc
   m_TagString: Untagged
@@ -45964,6 +45977,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.01797849, y: -0.071914196}
   m_Size: {x: 1.1673874, y: 2.1861715}
   m_Direction: 0
+--- !u!114 &1282172849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282172844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a871f6fcf15614c86aeb1a7d5754f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  redius: 2
 --- !u!1 &1323013010
 GameObject:
   m_ObjectHideFlags: 0
@@ -55600,6 +55629,7 @@ GameObject:
   - component: {fileID: 1416976883}
   - component: {fileID: 1416976882}
   - component: {fileID: 1416976881}
+  - component: {fileID: 1416976885}
   m_Layer: 6
   m_Name: Npc (1)
   m_TagString: Untagged
@@ -55714,6 +55744,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1416976885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416976880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a871f6fcf15614c86aeb1a7d5754f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  redius: 2
 --- !u!1 &1445071430
 GameObject:
   m_ObjectHideFlags: 0
@@ -55804,16 +55850,16 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.5
+      - m_Value: 0.25
         m_Name: PerParticleLifeTime
-        m_Overridden: 0
-      - m_Value: 0.4
+        m_Overridden: 1
+      - m_Value: 0.2
         m_Name: PerTrailsLifeTime
         m_Overridden: 1
       - m_Value: -0.6
         m_Name: FoursPosition_Z_direction
         m_Overridden: 0
-      - m_Value: 100
+      - m_Value: 198
         m_Name: ShootRaySpeed
         m_Overridden: 1
       - m_Value: 1.1111111e+10
@@ -55846,8 +55892,14 @@ VisualEffect:
       - m_Value: {x: 1.319508, y: 0, z: 0.15523623, w: 0}
         m_Name: perLerpXcolor
         m_Overridden: 1
-      - m_Value: {x: 0, y: 0, z: 0, w: 0}
+      - m_Value: {x: 0.9150943, y: 0.21490693, z: 0, w: 0}
         m_Name: AttackRayColor
+        m_Overridden: 1
+      - m_Value: {x: 0.6226415, y: 0.13547903, z: 0, w: 0}
+        m_Name: PerLerpXcolor
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 0.71327835, z: 1.0164217, w: 0}
+        m_Name: PerLerpYColor
         m_Overridden: 1
     m_Uint:
       m_Array: []
