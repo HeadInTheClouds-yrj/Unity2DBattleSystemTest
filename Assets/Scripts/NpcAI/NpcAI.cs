@@ -30,6 +30,7 @@ public class NpcAI : MonoBehaviour
     [SerializeField] private Transform start; // 
     private Vector3 end;
     private bool flag3 = true;
+    [SerializeField]
     private MagicRayVFX magicRayVFX;
     //Y = sqrt(r'2 - (X-x)'2) + y
     //(y-tansform.position.y)'2 + (x-transform.position.x)'2 == r'2;
@@ -37,7 +38,6 @@ public class NpcAI : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        magicRayVFX = GetComponent<MagicRayVFX>();
     }
     private void OnEnable()
     {
@@ -80,7 +80,7 @@ public class NpcAI : MonoBehaviour
                 {
                     flag3 = !flag3;
                 }
-                NpcRadiuMove(moveSpeed * 0.5f);
+                NpcRadiuMove(0f);
                 if (tiemfloat > 1.75f && !flag2)
                 {
                     end = player.position;

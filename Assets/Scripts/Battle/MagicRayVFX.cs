@@ -7,6 +7,8 @@ using UnityEngine.VFX;
 public class MagicRayVFX : MonoBehaviour
 {
     [SerializeField]
+    private Transform player;
+    [SerializeField]
     private LayerMask mask;
     private VisualEffect visualEffect;
     // Start is called before the first frame update
@@ -28,25 +30,25 @@ public class MagicRayVFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (counttime<.5f && tempflag == true)
-        {
-            counttime += Time.deltaTime;
-        }
-        else if (tempHit && counttime>=.25f)
-        {
-            RaycastHit2D[] all = Physics2D.RaycastAll(startPosition,endPosition1 - startPosition,100000f,LayerMask.GetMask("Npc"));
-            foreach (RaycastHit2D item in all)
-            {
-                Debug.Log(item.transform.name);
-            }
-            tempHit = false;
-        }
-        else if(counttime>.5f&&tempflag == true)
-        {
-            visualEffect.SetFloat("BegingTotalTime",9999999f);
-            counttime= 0;
-            tempflag = false;
-        }
+        //if (counttime<.5f && tempflag == true)
+        //{
+        //    counttime += Time.deltaTime;
+        //}
+        //else if (tempHit && counttime>=.25f)
+        //{
+        //    RaycastHit2D[] all = Physics2D.RaycastAll(startPosition,endPosition1 - startPosition,100000f,LayerMask.GetMask("Npc"));
+        //    foreach (RaycastHit2D item in all)
+        //    {
+        //        Debug.Log(item.transform.name);
+        //    }
+        //    tempHit = false;
+        //}
+        //else if(counttime>.5f&&tempflag == true)
+        //{
+        //    visualEffect.SetFloat("BegingTotalTime",9999999f);
+        //    counttime= 0;
+        //    tempflag = false;
+        //}
     }
     float counttime = 0;
     bool tempflag = false;
@@ -80,6 +82,7 @@ public class MagicRayVFX : MonoBehaviour
         visualEffect.SetFloat("BegingTotalTime", 0f);
         visualEffect.SetVector2("AttackDirection", direction.normalized);
         visualEffect.SetVector3("StartShootPosition", endPosition);
+        visualEffect.SetVector3("PerPowerfullStartPosition", new Vector3(transform.position.x - player.position.x ,transform.position.y - player.position.y,0));
         visualEffect.Play();
         while (true)
         {
