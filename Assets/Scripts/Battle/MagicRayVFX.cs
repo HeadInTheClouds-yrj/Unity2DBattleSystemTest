@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.VFX;
 
 public class MagicRayVFX : MonoBehaviour
 {
+    private string BEGING_TOTAL_TIME = "BegingTotalTime";
+    private string ATTACK_DIRECTION = "AttackDirection";
+    private string START_SHOOT_POSITION = "StartShootPosition";
+    private string PER_POWERFULL_START_POSITION = "PerPowerfullStartPosition";
     [SerializeField]
     private Transform player;
     [SerializeField]
@@ -76,20 +81,13 @@ public class MagicRayVFX : MonoBehaviour
         float counttime = 0;
         bool raycastHitFlag = true;
         //Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 end = targetPosition;
-        Vector2 direction = end - (Vector2)transform.position;
-        Vector3 endPosition = GetStartPosition(direction, transform.position, end, redius);
-        visualEffect.SetFloat("BegingTotalTime", 0f);
-        visualEffect.SetVector2("AttackDirection", direction.normalized);
-        visualEffect.SetVector3("StartShootPosition", endPosition);
-        visualEffect.SetVector3("PerPowerfullStartPosition", new Vector3(transform.position.x - player.position.x ,transform.position.y - player.position.y,0));
-        visualEffect.Play();
+        InitializePropety(transform, visualEffect, targetPosition);
         while (true)
         {
             counttime += Time.deltaTime;
             if (counttime>.23f && raycastHitFlag)
             {
-                RaycastHit2D[] all = Physics2D.RaycastAll(transform.position, (Vector3)end - transform.position,((Vector3)end - transform.position).magnitude * 100f , mask);
+                RaycastHit2D[] all = Physics2D.RaycastAll(transform.position, (Vector3)targetPosition - transform.position,((Vector3)targetPosition - transform.position).magnitude * 100f , mask);
                 foreach (RaycastHit2D item in all)
                 {
                     Debug.Log(item.transform.name);
@@ -104,6 +102,17 @@ public class MagicRayVFX : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+    private void InitializePropety(Transform transform, VisualEffect visualEffect, Vector3 targetPosition)
+    {
+        Vector2 end = targetPosition;
+        Vector2 direction = end - (Vector2)transform.position;
+        Vector3 endPosition = GetStartPosition(direction, transform.position, end, redius);
+        visualEffect.SetFloat(BEGING_TOTAL_TIME, 0f);
+        visualEffect.SetVector2(ATTACK_DIRECTION, direction.normalized);
+        visualEffect.SetVector3(START_SHOOT_POSITION, endPosition);
+        visualEffect.SetVector3(PER_POWERFULL_START_POSITION, new Vector3(transform.position.x - player.position.x, transform.position.y - player.position.y, 0));
+        visualEffect.Play();
     }
     private Vector3 GetStartPosition(Vector2 dir,Vector2 owner, Vector2 endPosition, float redius = 2f)
     {

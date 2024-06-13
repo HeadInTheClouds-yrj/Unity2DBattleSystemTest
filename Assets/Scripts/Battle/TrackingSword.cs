@@ -8,6 +8,8 @@ public class TrackingSword : MonoBehaviour
     private Rigidbody2D flySword;
     private Vector2 direction;
     private Transform target;
+    [SerializeField]
+    private float attackCoolingTime = 4f;
     [SerializeField]private float flySpeed = 100f;
     [SerializeField]private float rotateSpeed = 500f;
     [SerializeField]private LayerMask npcLayerMask;
@@ -35,7 +37,7 @@ public class TrackingSword : MonoBehaviour
             flySword.angularVelocity = -rotateAmount * rotateSpeed;
             flySword.velocity = -transform.up * flySpeed;
             Collider2D collider2d = Physics2D.OverlapCircle(transform.position, .1f, npcLayerMask);
-            if (lastHitTime < 4f)
+            if (lastHitTime < attackCoolingTime)
             {
                 lastHitTime += Time.deltaTime;
             }
