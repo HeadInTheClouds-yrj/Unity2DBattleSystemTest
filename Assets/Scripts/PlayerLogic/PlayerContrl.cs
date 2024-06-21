@@ -7,7 +7,7 @@ public class PlayerContrl : MonoBehaviour
 {
     private Vector3 target;
     [SerializeField] private float moveSpeed = 10;
-
+    [SerializeField] private Animator animator;
     private void OnEnable()
     {
         EventManager.Instance.InputEvent.OnGetKey_W += GetKey_W;

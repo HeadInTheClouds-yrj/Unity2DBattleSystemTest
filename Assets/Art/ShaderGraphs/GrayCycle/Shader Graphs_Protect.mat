@@ -39,8 +39,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Boolean: 0
+    - _BorderScal: 0.005
     - _Speed: 0
     m_Colors:
     - _Color: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
-    - _Player_scren: {r: 0.38, g: 0.68, b: 0, a: 0}
+    - _Player_scren: {r: 0.42, g: 0.68, b: 0, a: 0}
   m_BuildTextureStacks: []
