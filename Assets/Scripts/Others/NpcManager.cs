@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NpcManager : MonoBehaviour
 {
+
     public static NpcManager Instance;
     private List<NpcAI> npcs = new List<NpcAI>();
     private void OnEnable()
@@ -23,17 +24,6 @@ public class NpcManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (npcs[0].IsDestroyed())
-        {
-            EventManager.Instance.InputEvent.GetRightMouseDown(npcs[1].transform);
-        }
-        else if (npcs[1].IsDestroyed())
-        {
-            EventManager.Instance.InputEvent.GetRightMouseDown(npcs[0].transform);
-        }
-        else
-        {
-        }
     }
     public void AddNpc(NpcAI npcAI)
     {

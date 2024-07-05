@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Npc
   - Player
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 662607415
+    locked: 0
+  - name: Obstacle
+    uniqueID: 4194448865
     locked: 0

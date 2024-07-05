@@ -8,7 +8,7 @@ public class NpcAI : MonoBehaviour
 {
     [SerializeField] private GameObject flySword;
     [SerializeField] private Transform player;
-    private Vector3 target;
+    private Vector3 finalTargetPosition;
     [SerializeField] private float moveSpeed = 10f;
     private bool direction = false;
     [Range(0f, 30f)]
@@ -80,7 +80,7 @@ public class NpcAI : MonoBehaviour
                 {
                     flag3 = !flag3;
                 }
-                NpcRadiuMove(0f);
+                NpcRadiuMove(0f, radius,player.position,direction, spriteRenderer);
                 if (tiemfloat > 1.75f && !flag2)
                 {
                     end = player.position;
@@ -90,7 +90,7 @@ public class NpcAI : MonoBehaviour
             }
             else
             {
-                NpcRadiuMove(moveSpeed);
+                NpcRadiuMove(moveSpeed,radius, player.position,direction, spriteRenderer);
             }
             if (tiemfloat > 2)
             {
@@ -111,12 +111,22 @@ public class NpcAI : MonoBehaviour
     {
 
     }
-    private void NpcRadiuMove(float moveSpeed)
+    /**
+     * 摘要:主要是让transform围绕一个目标旋转
+     * 参数:
+     * moveSpeed:移动速度
+     * originTarget:原始目标
+     * direction:方向是否改变,true:顺时针.false:逆时针;
+     * spriteRenderer:显示组件
+     */
+    private void NpcRadiuMove(float moveSpeed,float radius,Vector3 originTarget,bool direction, SpriteRenderer spriteRenderer)
     {
+        float edge = Mathf.Sqrt(2) * radius * 0.5f;
+        Vector3 finalTargetPosition = Vector3.zero;
         //npc 在 player 的半径之外
-        if (transform.position.x > radius + player.position.x || transform.position.x < -radius + player.position.x)
+        if (transform.position.x > radius + originTarget.x || transform.position.x < -radius + originTarget.x)
         {
-            if (transform.position.x < player.position.x)
+            if (transform.position.x < originTarget.x)
             {
                 spriteRenderer.flipX = false;
             }
@@ -124,22 +134,22 @@ public class NpcAI : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, player.position, Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, originTarget, Time.deltaTime * moveSpeed);
         }
-        // npc 在 player 左方
-        else if (Mathf.Abs(transform.position.y - player.position.y) < Mathf.Sqrt(2) * radius * 0.5f && transform.position.x < player.position.x)
+        // npc 在 player 左方(x轴向上45度+x轴向下45度)
+        else if (Mathf.Abs(transform.position.y - originTarget.y) < edge && transform.position.x < originTarget.x)
         {
-            target.y = transform.position.y;
-            target.x = -Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((target.y - player.position.y), 2)) + player.position.x;
+            finalTargetPosition.y = transform.position.y;
+            finalTargetPosition.x = -Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((finalTargetPosition.y - originTarget.y), 2)) + originTarget.x;
             if (direction)
             {
-                target.y -= Time.deltaTime * moveSpeed;
+                finalTargetPosition.y -= Time.deltaTime * moveSpeed;
             }
             else
             {
-                target.y += Time.deltaTime * moveSpeed;
+                finalTargetPosition.y += Time.deltaTime * moveSpeed;
             }
-            if (transform.position.x < player.position.x)
+            if (transform.position.x < originTarget.x)
             {
                 spriteRenderer.flipX = false;
             }
@@ -147,22 +157,22 @@ public class NpcAI : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
         // npc 在 player 右方
-        else if (Mathf.Abs(transform.position.y - player.position.y) < Mathf.Sqrt(2) * radius * 0.5f && transform.position.x > player.position.x)
+        else if (Mathf.Abs(transform.position.y - originTarget.y) < edge && transform.position.x > originTarget.x)
         {
-            target.y = transform.position.y;
-            target.x = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((target.y - player.position.y), 2)) + player.position.x;
+            finalTargetPosition.y = transform.position.y;
+            finalTargetPosition.x = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((finalTargetPosition.y - originTarget.y), 2)) + originTarget.x;
             if (direction)
             {
-                target.y += Time.deltaTime * moveSpeed;
+                finalTargetPosition.y += Time.deltaTime * moveSpeed;
             }
             else
             {
-                target.y -= Time.deltaTime * moveSpeed;
+                finalTargetPosition.y -= Time.deltaTime * moveSpeed;
             }
-            if (transform.position.x < player.position.x)
+            if (transform.position.x < originTarget.x)
             {
                 spriteRenderer.flipX = false;
                 
@@ -172,22 +182,22 @@ public class NpcAI : MonoBehaviour
                 spriteRenderer.flipX = true;
                 
             }
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
         // npc 在 player 上方
-        else if (Mathf.Abs(transform.position.y - player.position.y) > Mathf.Sqrt(2) * radius * 0.5f && transform.position.y > player.position.y)
+        else if (Mathf.Abs(transform.position.y - originTarget.y) > edge && transform.position.y > originTarget.y)
         {
-            target.x = transform.position.x;
-            target.y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((target.x - player.position.x), 2)) + player.position.y;
+            finalTargetPosition.x = transform.position.x;
+            finalTargetPosition.y = Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((finalTargetPosition.x - originTarget.x), 2)) + originTarget.y;
             if (direction)
             {
-                target.x -= Time.deltaTime * moveSpeed;
+                finalTargetPosition.x -= Time.deltaTime * moveSpeed;
             }
             else
             {
-                target.x += Time.deltaTime * moveSpeed;
+                finalTargetPosition.x += Time.deltaTime * moveSpeed;
             }
-            if (transform.position.x < player.position.x)
+            if (transform.position.x < originTarget.x)
             {
                 spriteRenderer.flipX = false;
             }
@@ -195,22 +205,22 @@ public class NpcAI : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
         // npc 在 player 下方
-        else if (Mathf.Abs(transform.position.y - player.position.y) > Mathf.Sqrt(2) * radius * 0.5f && transform.position.y < player.position.y)
+        else if (Mathf.Abs(transform.position.y - originTarget.y) > edge && transform.position.y < originTarget.y)
         {
-            target.x = transform.position.x;
-            target.y = -Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((target.x - player.position.x), 2)) + player.position.y;
+            finalTargetPosition.x = transform.position.x;
+            finalTargetPosition.y = -Mathf.Sqrt(Mathf.Pow(radius, 2) - Mathf.Pow((finalTargetPosition.x - originTarget.x), 2)) + originTarget.y;
             if (direction)
             {
-                target.x += Time.deltaTime * moveSpeed;
+                finalTargetPosition.x += Time.deltaTime * moveSpeed;
             }
             else
             {
-                target.x -= Time.deltaTime * moveSpeed;
+                finalTargetPosition.x -= Time.deltaTime * moveSpeed;
             }
-            if (transform.position.x < player.position.x)
+            if (transform.position.x < originTarget.x)
             {
                 spriteRenderer.flipX = false;
             }
@@ -218,7 +228,7 @@ public class NpcAI : MonoBehaviour
             {
                 spriteRenderer.flipX = true;
             }
-            transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
     }
 }
