@@ -29,14 +29,15 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField]
     private ContextSolver movementDirectionSolver;
-
+    private Rigidbody2D rb2;
+    private float speed = 2.0f;
     bool following = false;
 
     private void Start()
     {
         //Detecting Player and Obstacles around
         InvokeRepeating("PerformDetection", 0, detectionDelay);
-        Debug.Log("Start");
+        rb2= GetComponent<Rigidbody2D>();
     }
 
     private void PerformDetection()
@@ -49,24 +50,25 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        ////Enemy AI movement based on Target availability
-        //if (aiData.currentTarget != null)
-        //{
-        //    //Looking at the Target
-        //    OnPointerInput?.Invoke(aiData.currentTarget.position);
-        //    if (following == false)
-        //    {
-        //        following = true;
-        //        StartCoroutine(ChaseAndAttack());
-        //    }
-        //}
-        //else if (aiData.GetTargetsCount() > 0)
-        //{
-        //    //Target acquisition logic
-        //    aiData.currentTarget = aiData.targets[0];
-        //}
-        ////Moving the Agent
+        //Enemy AI movement based on Target availability
+        if (aiData.currentTarget != null)
+        {
+            //Looking at the Target
+            //OnPointerInput?.Invoke(aiData.currentTarget.position);
+            if (following == false)
+            {
+                following = true;
+                StartCoroutine(ChaseAndAttack());
+            }
+        }
+        else if (aiData.GetTargetsCount() > 0)
+        {
+            //Target acquisition logic
+            aiData.currentTarget = aiData.targets[0];
+        }
+        //Moving the Agent
         //OnMovementInput?.Invoke(movementInput);
+        rb2.velocity = movementInput * speed;
     }
 
     private IEnumerator ChaseAndAttack()
@@ -87,7 +89,7 @@ public class EnemyAI : MonoBehaviour
             {
                 //Attack logic
                 movementInput = Vector2.zero;
-                OnAttackPressed?.Invoke();
+                //OnAttackPressed?.Invoke();
                 yield return new WaitForSeconds(attackDelay);
                 StartCoroutine(ChaseAndAttack());
             }

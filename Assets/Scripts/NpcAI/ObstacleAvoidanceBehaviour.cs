@@ -15,6 +15,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
 
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData aiData)
     {
+        Debug.Log("Avoidance");
         foreach (Collider2D obstacleCollider in aiData.obstacles)
         {
             Vector2 directionToObstacle
@@ -26,7 +27,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
                 = distanceToObstacle <= agentColliderSize
                 ? 1
                 : (radius - distanceToObstacle) / radius;
-
+            Debug.Log(weight);
             Vector2 directionToObstacleNormalized = directionToObstacle.normalized;
 
             //Add obstacle parameters to the danger array
@@ -40,6 +41,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
                 if (valueToPutIn > danger[i])
                 {
                     danger[i] = valueToPutIn;
+                    Debug.Log("danger:" + i + "=====" + danger[i]);
                 }
             }
         }

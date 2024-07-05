@@ -19,6 +19,7 @@ public class SeekBehaviour : SteeringBehaviour
 
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData aiData)
     {
+        Debug.Log("Seek");
         //if we don't have a target stop seeking
         //else set a new target
         if (reachedLastTarget)
@@ -30,6 +31,7 @@ public class SeekBehaviour : SteeringBehaviour
             }
             else
             {
+                Debug.Log("Targets not null");
                 reachedLastTarget = false;
                 aiData.currentTarget = aiData.targets.OrderBy
                     (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
@@ -62,6 +64,7 @@ public class SeekBehaviour : SteeringBehaviour
                 if (valueToPutIn > interest[i])
                 {
                     interest[i] = valueToPutIn;
+                    Debug.Log("Interesting:"+i+"====="+interest[i]);
                 }
 
             }
