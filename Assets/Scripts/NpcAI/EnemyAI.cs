@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -30,7 +31,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
     private Rigidbody2D rb2;
+    [SerializeField]
     private float speed = 2.0f;
+    [SerializeField]
+    private Transform weapon;   
     bool following = false;
 
     private void Start()
@@ -76,7 +80,6 @@ public class EnemyAI : MonoBehaviour
         if (aiData.currentTarget == null)
         {
             //Stopping Logic
-            Debug.Log("Stopping");
             movementInput = Vector2.zero;
             following = false;
             yield break;
@@ -97,10 +100,12 @@ public class EnemyAI : MonoBehaviour
             {
                 //Chase logic
                 movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
+                weapon.up = movementInput;
+                
+                
                 yield return new WaitForSeconds(aiUpdateDelay);
                 StartCoroutine(ChaseAndAttack());
             }
-
         }
 
     }

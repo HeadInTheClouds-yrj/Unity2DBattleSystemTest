@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class ContextSolver : MonoBehaviour
 {
     [SerializeField]
@@ -32,7 +33,6 @@ public class ContextSolver : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             interest[i] = Mathf.Clamp01(interest[i] - danger[i]);
-            Debug.Log(interest[i]);
         }
 
         interestGizmo = interest;
@@ -59,7 +59,6 @@ public class ContextSolver : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawRay(transform.position, resultDirection * rayLength);
-            Debug.Log("DrawDirection");
         }
     }
 }
