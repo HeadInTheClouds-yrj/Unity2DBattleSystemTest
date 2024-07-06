@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f, attackDelay = 1f;
 
     [SerializeField]
-    private float attackDistance = 0.5f;
+    private float attackDistance = 1.5f;
 
     //Inputs sent from the Enemy AI to the Enemy controller
     public UnityEvent OnAttackPressed;
@@ -30,7 +32,12 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
     private Rigidbody2D rb2;
-    private float speed = 2.0f;
+    [SerializeField]
+    private float speed = 15f;
+    [SerializeField]
+    private Transform slash;
+    [SerializeField]
+    private Transform weapon;
     bool following = false;
 
     private void Start()
@@ -68,7 +75,7 @@ public class EnemyAI : MonoBehaviour
         }
         //Moving the Agent
         //OnMovementInput?.Invoke(movementInput);
-        rb2.velocity = movementInput * speed;
+        rb2.velocity = movementInput * speed * Time.deltaTime;
     }
 
     private IEnumerator ChaseAndAttack()
@@ -76,7 +83,6 @@ public class EnemyAI : MonoBehaviour
         if (aiData.currentTarget == null)
         {
             //Stopping Logic
-            Debug.Log("Stopping");
             movementInput = Vector2.zero;
             following = false;
             yield break;
@@ -90,6 +96,20 @@ public class EnemyAI : MonoBehaviour
                 //Attack logic
                 movementInput = Vector2.zero;
                 //OnAttackPressed?.Invoke();
+                float anglez = Vector2.Angle(aiData.currentTarget.position, -Vector2.up);
+                VisualEffect ve = slash.GetComponent<VisualEffect>();
+                if (aiData.currentTarget.position.x < transform.position.x)
+                {
+                    ve.SetVector3("InitializeAngle", new Vector3(0, 0, -anglez));
+                    weapon.eulerAngles = new Vector3(0, 0, -anglez);
+                }
+                else
+                {
+                    ve.SetVector3("InitializeAngle", new Vector3(0, 0, anglez));
+                    weapon.eulerAngles = new Vector3(0, 0, anglez);
+                }
+                ve.Play();
+                weapon.up = movementInput;
                 yield return new WaitForSeconds(attackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
@@ -97,10 +117,12 @@ public class EnemyAI : MonoBehaviour
             {
                 //Chase logic
                 movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
+                weapon.up = movementInput;
+                
+                
                 yield return new WaitForSeconds(aiUpdateDelay);
                 StartCoroutine(ChaseAndAttack());
             }
-
         }
 
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class TargetDetector : Detector
 {
     [SerializeField]
-    private float targetDetectionRange = 5;
+    private float targetDetectionRange = 10;
 
     [SerializeField]
     private LayerMask obstaclesLayerMask, playerLayerMask;
@@ -29,10 +29,12 @@ public class TargetDetector : Detector
             RaycastHit2D hit = 
                 Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstaclesLayerMask);
 
+            
             //Make sure that the collider we see is on the "Player" layer
-            if (hit.collider != null && (playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0)
+            if (hit.collider != null)
             {
                 colliders = null;
+                Debug.Log("dont look");
             }
             else
             {
