@@ -34,7 +34,6 @@ public class TargetDetector : Detector
             if (hit.collider != null)
             {
                 colliders = null;
-                Debug.Log("dont look");
             }
             else
             {

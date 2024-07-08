@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -30,7 +31,11 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
     private Rigidbody2D rb2;
-    private float speed = 2.0f;
+    private float speed = 1000f;
+    [SerializeField]
+    private Transform weapon;
+    [SerializeField]
+    private Transform slash;
     bool following = false;
 
     private void Start()
