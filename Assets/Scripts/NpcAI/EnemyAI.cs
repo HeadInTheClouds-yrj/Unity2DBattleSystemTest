@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
-<<<<<<< HEAD
-using UnityEngine.VFX;
-=======
->>>>>>> f83997c3f2b5dcefe8e0b252c5d175509bfb9d2f
 
 public class EnemyAI : MonoBehaviour
 {
@@ -35,18 +30,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
     private Rigidbody2D rb2;
-    [SerializeField]
-<<<<<<< HEAD
-    private float speed = 15f;
-    [SerializeField]
-    private Transform slash;
-    [SerializeField]
-    private Transform weapon;
-=======
     private float speed = 2.0f;
-    [SerializeField]
-    private Transform weapon;   
->>>>>>> f83997c3f2b5dcefe8e0b252c5d175509bfb9d2f
     bool following = false;
 
     private void Start()
