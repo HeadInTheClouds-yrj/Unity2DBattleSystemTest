@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.VFX;
+using static Cyan.Blit;
 using static UnityEngine.GraphicsBuffer;
 
 public class NpcAI : MonoBehaviour
 {
     [SerializeField] private GameObject flySword;
-    [SerializeField] private Transform player;
+    private Transform player;
     private Vector3 finalTargetPosition;
     [SerializeField] private float moveSpeed = 10f;
     private bool direction = false;
@@ -42,6 +44,7 @@ public class NpcAI : MonoBehaviour
     private void OnEnable()
     {
         NpcManager.Instance.AddNpc(this);
+        
     }
     void Start()
     {
@@ -50,21 +53,30 @@ public class NpcAI : MonoBehaviour
         //{
         //    trackingSword.InitializedSword(transform,player, LayerMask.GetMask("Player"),100f,2000f);
         //}
+        NetworkManager.Singleton.OnServerStarted += () =>
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            Debug.Log(player == null);
+            Debug.Log(1111);
+        };
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Shoot();
+        if (player != null)
+        {
+            Shoot();
 
+        }
 
     }
     private void Shoot()
     {
         if (temp)
         {
-            magicRayVFX.Shoot(transform,player.transform.position);
+            magicRayVFX.Shoot(transform,player.position);
             //MagicRay.instance.NPCFireMagicRay(endParticle, _lineRenderer, _material_LineRender, end, start, player, _particleSystemStart, _particleSystemEnd, spriteRenderer.flipX);
             direction = Random.Range(0, 3) < 1f ? true : false;
             temp = !temp;

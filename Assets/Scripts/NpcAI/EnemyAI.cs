@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -34,7 +35,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private float speed = 2.0f;
     [SerializeField]
-    private Transform weapon;   
+    private Transform weapon;
+    [SerializeField]
+    private Transform slash;
     bool following = false;
 
     private void Start()
@@ -93,6 +96,8 @@ public class EnemyAI : MonoBehaviour
                 //Attack logic
                 movementInput = Vector2.zero;
                 //OnAttackPressed?.Invoke();
+                slash.GetComponent<VisualEffect>().Play();
+                slash.up = -movementInput;
                 yield return new WaitForSeconds(attackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
@@ -107,6 +112,5 @@ public class EnemyAI : MonoBehaviour
                 StartCoroutine(ChaseAndAttack());
             }
         }
-
     }
 }

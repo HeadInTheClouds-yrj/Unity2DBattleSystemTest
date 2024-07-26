@@ -61,4 +61,11 @@ public class ContextSolver : MonoBehaviour
             Gizmos.DrawRay(transform.position, resultDirection * rayLength);
         }
     }
+    private void Update()
+    {
+        if (Application.isPlaying && showGizmos)
+        {
+            Debug.DrawRay(transform.position, resultDirection * rayLength,Color.yellow);
+        }
+    }
 }

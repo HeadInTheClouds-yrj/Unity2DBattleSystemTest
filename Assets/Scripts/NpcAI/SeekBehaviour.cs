@@ -94,4 +94,17 @@ public class SeekBehaviour : SteeringBehaviour
             }
         }
     }
+    private void Update()
+    {
+        if (Application.isPlaying && interestsTemp != null)
+        {
+            if (interestsTemp != null)
+            {
+                for (int i = 0; i < interestsTemp.Length; i++)
+                {
+                    Debug.DrawRay(transform.position, Directions.eightDirections[i] * interestsTemp[i]*2,Color.green);
+                }
+            }
+        }
+    }
 }

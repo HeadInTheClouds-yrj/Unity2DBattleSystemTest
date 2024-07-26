@@ -74,7 +74,7 @@ public class MagicRayVFX : MonoBehaviour
         //tempHit= true;
         //tempflag = true;
         //counttime = 0;
-        StartCoroutine(ShootRayCountTime(transform,visualEffect,targetPosition,mask));
+        //StartCoroutine(ShootRayCountTime(transform,visualEffect,targetPosition,mask));
     }
     IEnumerator ShootRayCountTime(Transform transform,VisualEffect visualEffect,Vector3 targetPosition,LayerMask mask)
     {

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : NetworkBehaviour
 {
     [SerializeField] private Camera main_Camera;
     [SerializeField] private Transform player_default;
@@ -18,13 +19,19 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (IsOwner)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        CameraFollow();
+        if (target != null)
+        {
+            CameraFollow();
+        }
     }
     public void SetCameraFollow(Transform target,float cameraMoveSpeed = 25f ,float cameraHeight= 10f)
     {

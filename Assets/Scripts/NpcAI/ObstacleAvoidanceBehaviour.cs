@@ -67,8 +67,23 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
         }
 
     }
+    private void Update()
+    {
+        if (Application.isPlaying && dangersResultTemp != null)
+        {
+            if (dangersResultTemp != null)
+            {
+                for (int i = 0; i < dangersResultTemp.Length; i++)
+                {
+                    Debug.DrawRay(
+                        transform.position,
+                        Directions.eightDirections[i] * dangersResultTemp[i] * 2
+                        ,Color.red);
+                }
+            }
+        }
+    }
 }
-
 public static class Directions
 {
     public static List<Vector2> eightDirections = new List<Vector2>{
