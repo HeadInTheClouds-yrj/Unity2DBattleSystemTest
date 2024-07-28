@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -15,29 +16,22 @@ public class CameraManager : NetworkBehaviour
     private Vector3 temp;
     private Transform otherUnit;
     private Transform target;
-    
+
+
     // Start is called before the first frame update
     void Start()
-    {
-        if (IsOwner)
-        {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+    {   
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
-        {
-            CameraFollow();
-        }
+        CameraFollow();
     }
-    public void SetCameraFollow(Transform target,float cameraMoveSpeed = 25f ,float cameraHeight= 10f)
+    public void SetCameraFollow(Transform target, float cameraMoveSpeed = 25f, float cameraHeight = 10f)
     {
         otherUnit = target;
-        this.cameraMoveSpeed= cameraMoveSpeed;
-        this.cameraHeight= cameraHeight;
+        this.cameraMoveSpeed = cameraMoveSpeed;
+        this.cameraHeight = cameraHeight;
     }
     public void ResetCameraFollow()
     {
@@ -51,9 +45,14 @@ public class CameraManager : NetworkBehaviour
     }
     private void CameraFollow()
     {
+        if (PlayerContrl.localPlayer != null)
+        {
+            SetCameraFollow(PlayerContrl.localPlayer.transform);
+
+        }
         if (otherUnit == null || otherUnit.IsDestroyed())
         {
-            target = player_default;
+            return;
         }
         else
         {

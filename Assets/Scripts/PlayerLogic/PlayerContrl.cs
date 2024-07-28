@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerContrl : MonoBehaviour
+public class PlayerContrl : NetworkBehaviour
 {
+    public static PlayerContrl localPlayer;
     private Vector3 target;
     [SerializeField] private float moveSpeed = 10;
     [SerializeField] private Animator animator;
@@ -12,17 +14,17 @@ public class PlayerContrl : MonoBehaviour
     {
         EventManager.Instance.InputEvent.OnGetKey_W += GetKey_W;
         EventManager.Instance.InputEvent.OnGetKey_S += GetKey_S;
-        EventManager.Instance.InputEvent.OnGetKey_A += GetKey_A;
         EventManager.Instance.InputEvent.OnGetKey_D += GetKey_D;
+        EventManager.Instance.InputEvent.OnGetKey_A += GetKey_A;
+
     }
     private void OnDisable()
     {
         EventManager.Instance.InputEvent.OnGetKey_W -= GetKey_W;
         EventManager.Instance.InputEvent.OnGetKey_S -= GetKey_S;
-        EventManager.Instance.InputEvent.OnGetKey_A -= GetKey_A;
         EventManager.Instance.InputEvent.OnGetKey_D -= GetKey_D;
+        EventManager.Instance.InputEvent.OnGetKey_A -= GetKey_A;
     }
-
     private void GetKey_W()
     {
         target = transform.position;
@@ -56,17 +58,47 @@ public class PlayerContrl : MonoBehaviour
     {
         
     }
-
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            localPlayer = this;
+            Debug.Log(localPlayer.OwnerClientId);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        EventManager.Instance.InputEvent.GetKey_W();
-        EventManager.Instance.InputEvent.GetKey_S();
-        EventManager.Instance.InputEvent.GetKey_A();
-        EventManager.Instance.InputEvent.GetKey_D();
+        if (!IsOwner)
+        {
+            return;
+        }
+        test();
+
+
         EventManager.Instance.InputEvent.GetLeftMouse();
         EventManager.Instance.InputEvent.GetLeftMouseUp();
         EventManager.Instance.InputEvent.GetLeftMouseDown(this.transform);
         EventManager.Instance.InputEvent.GetRightMouseDown(this.transform);
+
+    }
+    private void test()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            GetKey_W();
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            GetKey_S();
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            GetKey_A();
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            GetKey_D();
+        }
     }
 }

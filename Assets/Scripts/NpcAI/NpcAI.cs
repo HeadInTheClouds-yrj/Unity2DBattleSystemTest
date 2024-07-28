@@ -6,7 +6,7 @@ using UnityEngine.VFX;
 using static Cyan.Blit;
 using static UnityEngine.GraphicsBuffer;
 
-public class NpcAI : MonoBehaviour
+public class NpcAI : NetworkBehaviour
 {
     [SerializeField] private GameObject flySword;
     private Transform player;
@@ -34,6 +34,7 @@ public class NpcAI : MonoBehaviour
     private bool flag3 = true;
     [SerializeField]
     private MagicRayVFX magicRayVFX;
+    //NetworkVariable<bool> networkVariable = new NetworkVariable<bool>();
     //Y = sqrt(r'2 - (X-x)'2) + y
     //(y-tansform.position.y)'2 + (x-transform.position.x)'2 == r'2;
     // Start is called before the first frame update
@@ -44,7 +45,7 @@ public class NpcAI : MonoBehaviour
     private void OnEnable()
     {
         NpcManager.Instance.AddNpc(this);
-        
+
     }
     void Start()
     {
@@ -53,12 +54,6 @@ public class NpcAI : MonoBehaviour
         //{
         //    trackingSword.InitializedSword(transform,player, LayerMask.GetMask("Player"),100f,2000f);
         //}
-        NetworkManager.Singleton.OnServerStarted += () =>
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            Debug.Log(player == null);
-            Debug.Log(1111);
-        };
 
     }
 
@@ -72,11 +67,20 @@ public class NpcAI : MonoBehaviour
         }
 
     }
+
+    public override void OnNetworkSpawn()
+    {
+        if (PlayerContrl.localPlayer != null)
+        {
+            player = PlayerContrl.localPlayer.transform;
+
+        }
+    }
     private void Shoot()
     {
         if (temp)
         {
-            magicRayVFX.Shoot(transform,player.position);
+            magicRayVFX.Shoot(transform, player.position);
             //MagicRay.instance.NPCFireMagicRay(endParticle, _lineRenderer, _material_LineRender, end, start, player, _particleSystemStart, _particleSystemEnd, spriteRenderer.flipX);
             direction = Random.Range(0, 3) < 1f ? true : false;
             temp = !temp;
@@ -92,7 +96,7 @@ public class NpcAI : MonoBehaviour
                 {
                     flag3 = !flag3;
                 }
-                NpcRadiuMove(0f, radius,player.position,direction, spriteRenderer);
+                NpcRadiuMove(0f, radius, player.position, direction, spriteRenderer);
                 if (tiemfloat > 1.75f && !flag2)
                 {
                     end = player.position;
@@ -102,7 +106,7 @@ public class NpcAI : MonoBehaviour
             }
             else
             {
-                NpcRadiuMove(moveSpeed,radius, player.position,direction, spriteRenderer);
+                NpcRadiuMove(moveSpeed, radius, player.position, direction, spriteRenderer);
             }
             if (tiemfloat > 2)
             {
@@ -113,8 +117,8 @@ public class NpcAI : MonoBehaviour
     }
     public void ReduceBlood(float value)
     {
-        ThrowDamageText.instance.ThrowReduceTextFactory(transform, value,15f);
-        if (value >=80)
+        ThrowDamageText.instance.ThrowReduceTextFactory(transform, value, 15f);
+        if (value >= 80)
         {
             Destroy(gameObject);
         }
@@ -122,6 +126,11 @@ public class NpcAI : MonoBehaviour
     private void ShootSwort()
     {
 
+    }
+    [ClientRpc]
+    private void SetFlipXClientRpc(bool b)
+    {
+        spriteRenderer.flipX= b;
     }
     /**
      * 摘要:主要是让transform围绕一个目标旋转
@@ -140,11 +149,11 @@ public class NpcAI : MonoBehaviour
         {
             if (transform.position.x < originTarget.x)
             {
-                spriteRenderer.flipX = false;
+                SetFlipXClientRpc(false);
             }
             else
             {
-                spriteRenderer.flipX = true;
+                SetFlipXClientRpc(true);
             }
             transform.position = Vector3.MoveTowards(transform.position, originTarget, Time.deltaTime * moveSpeed);
         }
@@ -163,11 +172,11 @@ public class NpcAI : MonoBehaviour
             }
             if (transform.position.x < originTarget.x)
             {
-                spriteRenderer.flipX = false;
+                SetFlipXClientRpc(false);
             }
             else
             {
-                spriteRenderer.flipX = true;
+                SetFlipXClientRpc(true);
             }
             transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
@@ -186,12 +195,12 @@ public class NpcAI : MonoBehaviour
             }
             if (transform.position.x < originTarget.x)
             {
-                spriteRenderer.flipX = false;
-                
+                SetFlipXClientRpc(false);
+
             }
             else
             {
-                spriteRenderer.flipX = true;
+                SetFlipXClientRpc(true);
                 
             }
             transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
@@ -211,11 +220,11 @@ public class NpcAI : MonoBehaviour
             }
             if (transform.position.x < originTarget.x)
             {
-                spriteRenderer.flipX = false;
+                SetFlipXClientRpc(false);
             }
             else
             {
-                spriteRenderer.flipX = true;
+                SetFlipXClientRpc(true);
             }
             transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }
@@ -234,11 +243,11 @@ public class NpcAI : MonoBehaviour
             }
             if (transform.position.x < originTarget.x)
             {
-                spriteRenderer.flipX = false;
+                SetFlipXClientRpc(false);
             }
             else
             {
-                spriteRenderer.flipX = true;
+                SetFlipXClientRpc(true);
             }
             transform.position = Vector3.MoveTowards(transform.position, finalTargetPosition, Time.deltaTime * moveSpeed);
         }

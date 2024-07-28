@@ -11,10 +11,12 @@ public class NetworkUISet : MonoBehaviour
     public void StartHost()
     {
         NetworkManager.Singleton.StartHost();
+        EventManager.Instance.InputEvent.HostStart();
     }
     public void StartClient()
     {
         NetworkManager.Singleton.StartClient();
+        EventManager.Instance.InputEvent.ClientStart();
     }
 
 }

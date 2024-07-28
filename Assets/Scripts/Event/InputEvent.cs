@@ -10,6 +10,7 @@ public class InputEvent
     {
         if (OnGetKey_W != null&&Input.GetKey(KeyCode.W))
         {
+            Debug.Log("w");
             OnGetKey_W();
         }
     }
@@ -67,6 +68,22 @@ public class InputEvent
         if (OnGetRightMouseDown != null && Input.GetMouseButtonDown(2))
         {
             OnGetRightMouseDown(parent);
+        }
+    }
+    public event Action OnHostStart;
+    public void HostStart()
+    {
+        if (OnHostStart != null)
+        {
+            OnHostStart();
+        }
+    }
+    public event Action OnClientStart;
+    public void ClientStart()
+    {
+        if (OnClientStart != null)
+        {
+            OnClientStart();
         }
     }
 }
